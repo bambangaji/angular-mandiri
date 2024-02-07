@@ -1,0 +1,137 @@
+
+    <div class="row justify-content-center mt-2">
+  
+    <div class="col-md-8">
+      <div class="row m-auto p-3 align-items-center" >
+        <div class="card">
+          <div class="p-3">
+            <div class="row">
+    
+              <div class="col-md-12 text-right">
+                <div class="btn-group" role="group">
+                  <p for="pageSize" >Show:  </p>
+                  <button class="btn btn-sm btn-outline-secondary" [class.active]="pageSize === 10" (click)="onPageSizeChange(10)">10</button>
+                  <button class="btn btn-sm btn-outline-secondary" [class.active]="pageSize === 20" (click)="onPageSizeChange(20)">20</button>
+                  <button class="btn btn-sm btn-outline-secondary" [class.active]="pageSize === 30" (click)="onPageSizeChange(30)">30</button>
+
+                </div>
+                <div class="input-group ml-3">
+                  <input type="text" class="form-control form-control-sm" placeholder="Search" [(ngModel)]="searchQuery" (input)="onSearch()">
+                  <!-- <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" (click)="onSearch()">Search</button>
+                  </div> -->
+                </div>
+                <a (click)="toAddEmployee()" class="btn btn-success btn-sm ml-3">Add Employee</a>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-3">
+                <p class="cursor-pointer pr-2" (click)="onSort('firstName')">
+                First Name
+                </p>
+              </div>
+              <div class="col-3">
+                <p class="cursor-pointer pr-2" (click)="onSort('gender')">
+                Gender
+                </p>
+              </div>
+              <div class="col-3">
+                <p class="cursor-pointer pr-2" (click)="onSort('status')">
+                Status
+                </p>
+              </div>
+              <div class="col-3">
+                <p class="cursor-pointer pr-2" (click)="onSort('email')">
+                Email
+                </p>
+              </div>
+            </div>
+          </div>
+      </div>
+      
+    <div *ngIf="loading; else content" class="text-center mt-4">
+      <div class="d-flex flex-column align-items-center">
+        <div class="spinner-border" role="status">
+        </div>
+        <p>
+          Loading....
+        </p>
+      </div>
+    </div>
+    
+    <ng-template #content>
+      <div class="row  m-auto p-3 align-items-center " >
+        <div *ngFor="let employee of employees">
+          <div class="col-12  p-1">
+            <div class=" bg-white shadow-sm px-4 py-3 rounded ">
+              <div>
+                <p class="bold-text">
+                  {{ employee.firstName }} {{ employee.lastName }} - {{ employee.group }}
+                </p>
+                <div class="row text-sm border-bottom pt-2 pb-2">
+                  <div class="col-3 border-right">
+                    <p class="color-grey">
+                      {{employee.birthDate | date:'dd-MM-yyyy'}}
+                    </p>
+                  </div>
+                  <div class="col-3 border-right">
+                    <p class="color-grey ">
+                      {{employee.gender}}
+                    </p>
+                  </div>
+                  <div class="col-3 ">
+                    <p class="color-grey ">
+                      {{employee.status}}
+                    </p>
+                  </div>
+                </div>
+                <div class="row justify-content-between px-2 align-items-center ">
+                  <div class="col-8">
+                    <div class="row align-items-center">
+                      <div class="col align-items-center">
+                        <p class="text-sm color-grey"> {{employee.email}}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col d-flex justify-content-between">
+                    <div class="row float-right align-items-center bg-orange-light rounded mt-2 cursor-pointer" (click)="toDetailPage(employee.id)">
+                      <div class="col align-items-center p-1" >
+                        <p class="text-sm color-orange"> Details
+                          <span class="pl-4"><i class="fas fa-arrow-right ml-3 color-orange"></i></span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row float-right align-items-center bg-danger rounded mt-2 cursor-pointer" (click)="openModal('Delete',employee.firstName)">
+                      <div class="col align-items-center p-1">
+                        <p class="text-sm  text-white"> Delete
+                          <span class="pl-4"><i class="fas fa-trash ml-3 text-white"></i></span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row float-right align-items-center bg-warning rounded mt-2 cursor-pointer" (click)="openModal('Edit',employee.firstName)" >
+                      <div class="col align-items-center p-1">
+                        <p class="text-sm  text-white"> Edit
+                          <span class="pl-4"><i class="fas fa-pen ml-3 text-white"></i></span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </ng-template>
+    <div class="col-12 text-center">
+      <button class="btn btn-link" [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">Previous</button>
+      <span>{{ currentPage }} of {{ getTotalPages() }}</span>
+      <button class="btn btn-link" [disabled]="currentPage === getTotalPages()" (click)="onPageChange(currentPage + 1)">Next</button>
+    </div>
+    <app-modal #modalRef ></app-modal>
+  </div>
+    </div>
+    </div>

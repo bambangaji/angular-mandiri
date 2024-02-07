@@ -1,0 +1,92 @@
+<!-- add-employee.component.html -->
+<div class="container mt-4">
+    <div class="card">
+      <div class="card-header bg-light">
+        <h5 class="font-weight-bold mb-0">Add Employee</h5>
+      </div>
+      <div class="card-body">
+        <form #employeeForm="ngForm" (submit)="onSubmit()">
+          <!-- Basic Information Section -->
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-control" [(ngModel)]="employee.username" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" class="form-control" [(ngModel)]="employee.gender" required>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="employee.firstName" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="employee.lastName" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="employee.email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="birthdate">Birthdate:</label>
+            <input  id="birthdate" name="birthDate" class="form-control"  [(ngModel)]="birthDate" required readonly (click)="openPicker()">
+          </div>
+
+          <div class="form-group" style="display:none;">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" name="EbirthDate" (dateChange)="validateDateFormat($event)" [max]="maxDate" [(ngModel)]="employee.birthDate"  readonly (click)="openPicker()">
+              <mat-datepicker  touchUi  #picker ></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+  
+          <!-- Employment Information Section -->
+          <div class="form-group">
+            <label for="basicSalary">Basic Salary:</label>
+            <input type="number" id="basicSalary" name="basicSalary" class="form-control" [(ngModel)]="employee.basicSalary" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="status">Status:</label>
+            <select id="status" name="status" class="form-control" [(ngModel)]="employee.status" required>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+            </select>
+          </div>
+  
+          <div class="form-group">
+            <label for="group">Group:</label>
+            <ng-select
+              name="group"
+              bindLabel="."
+              [(ngModel)]="employee.group"
+              [items]="dummyData"
+              [searchable]="true"
+              class="custom-dropdown form-control"
+            ></ng-select>
+            <input type="hidden" id="basicSalary" name="basicSalary" class="form-control" [(ngModel)]="employee.group" required>
+          </div>
+  
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" class="form-control" rows="3" [(ngModel)]="employee.description" required></textarea>
+          </div>
+  
+          <!-- Submit Button -->
+          <div class="d-flex">
+          <button class="btn btn-primary mt-2 mr-2" (click)="cancelAddEmployee()" >Cancel</button>
+          <button type="submit" class="btn btn-primary mt-2" [disabled]="!employeeForm.valid" [ngClass]="{'btn-secondary': !employeeForm.valid}">Add Employee</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

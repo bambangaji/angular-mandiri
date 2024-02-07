@@ -1,0 +1,26 @@
+<div class="container mt-4"  *ngIf="employee$ | async as employee">
+    <div class="card">
+      <div class="card-header">
+        Employee Details
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>Username:</strong> {{ employee.username }}</p>
+            <p><strong>First Name:</strong> {{ employee.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ employee.lastName }}</p>
+            <p><strong>Email:</strong> {{ employee.email }}</p>
+            <p><strong>Birth Date:</strong> {{ employee.birthDate | date }}</p>
+            <p><strong>Basic Salary:</strong> {{ employee.basicSalary | customCurrency }}</p>
+            <p><strong>Status:</strong> {{ employee.status }}</p>
+            <p><strong>Group:</strong> {{ employee.group }}</p>
+            <p><strong>Description:</strong> {{ employee.description }}</p>
+            <p><strong>Gender:</strong> {{ employee.gender }}</p>
+          </div>
+        </div>
+        <div>
+            <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal" (click)="goBack()">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>

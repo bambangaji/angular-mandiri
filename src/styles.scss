@@ -1,1 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
+// @import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "./assets/global.scss";
+@import '~@fortawesome/fontawesome-free/css/all.css';
+.cursor-pointer{
+    cursor: pointer;
+}
+.ml-2{
+    margin-left: 5px !important;
+}
+.pl-2{
+    padding-left: 5px !important;
+}
+.mr-2{
+    margin-right: 5px !important;
+}
+.pr-2{
+    padding-right:  5px !important;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+p{
+    margin: 0 !important;
+}
